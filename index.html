@@ -4,64 +4,91 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test sheet</title>
+    <link rel="stylesheet" href="css/base.css">
+
+    <title>Ultimate Catan</title>
 </head>
 <body>
 
-    <div class="output">
-        Here is my test sheet
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <h1>Ultimate Catan</h1>
+                <ul class="nav-menu">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/history" class="nav-link">History</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container header">
+        <h1>Overall leaderboard</h1>
     </div>
 
-    <br>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+            
+            <table class="base-table" id="leaderboard">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td>Player</td>
+                        <td>Games played</td>
+                        <td><b>Games won</b></td>
+                        <td>Games lost</td>
+                        <td>Total Points for</td>
+                        <td>Total Points against</td>
+                        <td>Win ratio</td>
+                        <td>Av. Points for</td>
+                        <td>Av. Points against</td>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                </tbody>
+            </table>
 
-    <table id="full_table" style="border: 1px solid #000000">
-        <thead>
-            <tr>
-                <td>Game number</td>
-                <td>Game type</td>
-                <td>Date</td>
-                <td>Player</td>
-                <td>Points</td>
-            </tr>
-        </thead>
-        <tbody>
+            </div>
 
-        </tbody>
-    </table>
+        </div>
+    </div>
+
+
+    <script src="js/gsheets.js"></script>
 
     <script>
     
-    async function getSheetData(url){
-
-        try {
-            const response = await fetch(url)
-            const text_data = await response.text()
-
-            const data = JSON.parse(text_data.substr(47).slice(0, -2))
-            
-            return data
-        } catch (err) {
-            console.error(err)
-        }
+    function createTd(tr, value){
+        td = document.createElement('td')
+        td.innerHTML = value
+        tr.appendChild(td)
     }
 
-    function createTable(data){
+    function createLeaderboardTable(leaderboard){
 
-        table = document.getElementById('full_table')
+        table = document.getElementById('leaderboard')
         tbody = table.getElementsByTagName('tbody')[0]
 
-        data.table.rows.forEach(row => {
-            console.log('Yes')
-            console.log(row.c)
-            tr = document.createElement('tr')
-            row.c.forEach(el => {
-                td = document.createElement('td')
-                td.innerHTML = el.v
-                tr.appendChild(td)
-            })
+        leaderboard.forEach((row, idx) => {
+
+                tr = document.createElement('tr')
+
+                createTd(tr, idx+1)
+                createTd(tr, row.player)
+                createTd(tr, row.played)
+                createTd(tr, `<b>${row.won}</b>`)
+                createTd(tr, row.lost)
+                createTd(tr, row.points_for)
+                createTd(tr, row.points_against)
+                createTd(tr, Math.round(100*row.won/row.played)/100)
+                createTd(tr, Math.round(100*row.points_for/row.played)/100)
+                createTd(tr, Math.round(100*row.points_against/row.played)/100)
+
             tbody.appendChild(tr)
-        }) 
-        
+        })         
     }
 
     async function main(){
@@ -70,7 +97,17 @@
 
         data = await getSheetData(url)
 
-        createTable(data)
+        // console.log(data)
+
+        const records = createRecords(data)
+        
+        let games = createGames(records)
+
+        let leaderboard = createLeaderboard(games)
+        
+        createLeaderboardTable(leaderboard)
+
+        console.log(leaderboard)
 
     }
 
