@@ -11,6 +11,9 @@
     --green: rgb(70, 184, 104);
     --gray: rgb(201, 201, 201);
     --red: rgb(154, 36, 36);
+    --dark-yellow: rgb(124, 81, 1);
+    --dark-blue: rgb(12, 41, 101);
+    --dark-green: rgb(3, 97, 66);
 }
 
 *{
@@ -40,7 +43,7 @@ h1, h2, h3, h4, h5 {
 
 .container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: auto;
 }
 
@@ -101,8 +104,19 @@ nav {
     padding: 5px;
     color: var(--very-dark);
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
+.game_selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game_selector .game_type {
+    margin-right: 15px;
+}
 
 /* Cards */
 
@@ -197,4 +211,40 @@ nav {
     font-family: 'Antonio', sans-serif;
     color: var(--very-dark);
     font-style: italic;
+    padding: 10px;
+}
+
+.base-table thead td {
+    margin-bottom: 20px;
+}
+
+/* images */
+.icon {
+    width: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.icon:hover {
+    opacity: 1;
+}
+
+.original {
+    background-color: var(--dark-yellow);
+}
+
+.seafarers {
+    background-color: var(--dark-blue);
+}
+
+.cities_knights {
+    background-color: var(--dark-green);
+}
+
+.icon path {
+    fill: #efefef;
 }
