@@ -27,7 +27,7 @@ body, html {
     margin: 0px;
     padding: 0px;
     font-family: 'Roboto', sans-serif;
-    color: var(--dark);    
+    color: var(--dark);
 }
 
 a {
@@ -201,10 +201,19 @@ nav {
 
 .base-table {
     width: 100%;
+    font-size: 1.1em;
+    border-collapse: collapse;
+}
+
+tbody tr:nth-child(odd){
+    border-radius: 10px;
+    background-color: #cccccc;
 }
 
 .base-table td {
-    padding: 3px;
+    padding: 12px;
+    border: 0px solid;
+    margin: 0px;
 }
 
 .base-table thead {
@@ -212,10 +221,6 @@ nav {
     color: var(--very-dark);
     font-style: italic;
     padding: 10px;
-}
-
-.base-table thead td {
-    margin-bottom: 20px;
 }
 
 /* images */
@@ -226,10 +231,14 @@ nav {
     margin-left: 5px;
     cursor: pointer;
     opacity: 0.4;
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.1s ease-in-out;
 }
 
 .icon:hover {
+    opacity: 1;
+}
+
+.icon-active {
     opacity: 1;
 }
 
