@@ -103,7 +103,7 @@ nav {
 .header {
     padding: 5px;
     color: var(--very-dark);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
 }
@@ -133,6 +133,7 @@ nav {
     border: 1px solid var(--very-light);
     border-top: 10px solid var(--very-light);
     box-shadow: 0px 5px 10px rgba(10, 10, 10, 0.1);
+    margin-bottom: 10px;
 }
 
 .card-header {
