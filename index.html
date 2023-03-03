@@ -87,79 +87,8 @@
     </div>
       <br>
 
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      
-      <script>
-        const ctx = document.getElementById('myChart');
-        
-        let data = {
-        labels: ['Andy', 'Joyner', 'Kieran', 'Lewis'],
-        datasets: [
-            {
-            label: 'Original',
-            data: [0, 1, 3, 4],
-            backgroundColor: 'rgb(124, 81, 1)',
-            stack: 'Stack 0',
-            },
-            {
-            label: 'Seafarers',
-            data: [3, 9, 7, 5],
-            backgroundColor: 'rgb(12, 41, 101)',
-            stack: 'Stack 0',
-            },
-            {
-            label: 'Cities and Knights',
-            data: [10, 1, 2, 3],
-            backgroundColor: 'rgb(3, 97, 66)',
-            stack: 'Stack 0',
-            },
-        ]
-        };
-
-        const config = {
-            type: 'bar',
-            data: data,
-            options: {
-                responsive: true,
-                interaction: {
-                    intersect: false,
-                },
-                scales: {
-                x: {
-                    stacked: true,
-                },
-                y: {
-                    stacked: true
-                }
-                }
-            }
-        }
-
-        new Chart(ctx, config);
-
-
-        // new Chart(ctx, {
-        //   type: 'bar',
-        //   data: {
-        //     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        //     datasets: [{
-        //       label: '# of Votes',
-        //       data: [12, 19, 3, 5, 2, 3],
-        //       borderWidth: 1
-        //     }]
-        //   },
-        //   options: {
-        //     scales: {
-        //       y: {
-        //         beginAtZero: true
-        //       }
-        //     }
-        //   }
-        // });
-      </script>
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/charts.js"></script>
     <script src="js/gsheets.js"></script>
 
     <script>
@@ -194,25 +123,23 @@
         })         
     }
 
-    async function main(){
-
-        const url = 'https://docs.google.com/spreadsheets/d/13lr1lbVzE-fpeGLy_X80PKPHCEXzpqUe1Yu04Q2sin8/gviz/tq?'
-
-        data = await getSheetData(url)
-
-        // console.log(data)
-
-        const records = createRecords(data)
+    function getWins(games) {
         
-        let games = createGames(records)
+        players = ['Andy', 'Joyner', 'Kieran', 'Lewis']
 
-        let leaderboard = createLeaderboard(games)
-        
-        createLeaderboardTable(leaderboard)
+        let wins = {
+            'Original': [0, 0, 0, 0],
+            'Sea Farers': [0, 0, 0, 0],
+            'Cities and Knights': [0, 0, 0, 0]
+        }
 
+        for (let game of games) {
+            i = players.indexOf(game.winner)            
+            wins[game.game_type][i] += 1
+        }
+
+        return wins
     }
-
-    main()
 
     const game_options = ['All', 'Original', 'Seafarers', 'Cities and Kights']
     const icon_id_list = ['icon_orig', 'icon_sea', 'icon_city']
@@ -252,14 +179,28 @@
 
     }
 
-    // icon_list = document.getElementsByClassName('icon')
+    async function main(){
 
-    // for (let icon of icon_list){
-    //     console.log(icon)
-    //     icon.onmouserover = () => {
+        const url = 'https://docs.google.com/spreadsheets/d/13lr1lbVzE-fpeGLy_X80PKPHCEXzpqUe1Yu04Q2sin8/gviz/tq?'
 
-    //     }
-    // }
+        data = await getSheetData(url)
+
+        const records = createRecords(data)
+
+        let games = createGames(records)
+
+        let leaderboard = createLeaderboard(games)
+
+        const wins = getWins(games)
+
+        
+
+        createLeaderboardTable(leaderboard)
+        createChart(wins)
+
+    }
+
+    main()
 
     </script>
 
