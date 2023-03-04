@@ -166,11 +166,13 @@ nav {
     color: var(--catan-yellow);
 }
 
+.sea_farers h2 {
+    color: var(--catan-blue);
+}
+
 .cities_knights h2 {
     color: var(--catan-green);
 }
-
-
 
 .card:hover .card-title {
     transform: translateY(-5px);
@@ -227,7 +229,7 @@ nav {
 
 tbody tr:nth-child(odd){
     border-radius: 10px;
-    background-color: #cccccc;
+    background-color: #ededed;
 }
 
 .base-table td {
@@ -242,6 +244,13 @@ tbody tr:nth-child(odd){
     font-style: italic;
     padding: 10px;
 }
+
+.base-table .points_col {
+    width: 20%;
+    text-align: right;
+    padding-right: 10px;
+}
+
 
 /* images */
 .icon {
@@ -266,7 +275,7 @@ svg.original {
     background-color: var(--catan-yellow);
 }
 
-svg.seafarers {
+svg.sea_farers {
     background-color: var(--catan-blue);
 }
 

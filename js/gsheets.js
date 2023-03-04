@@ -22,6 +22,15 @@ function createRecords(data){
 
 }
 
+function parseDate(date_string) {
+
+    const pattern = new RegExp("^Date\\(([0-9]{4}),([0-9]{1,2}),([0-9]{1,2})\\)$")
+    groups = date_string.match(pattern)
+
+    return new Date(groups[1], groups[2], groups[3])
+
+}
+
 function createGames(records){
 
     // Create games
@@ -33,8 +42,9 @@ function createGames(records){
 
         if (!(game_id in games)) {
             games[game_id] = {
+                "game_number": game_id+1,
                 "game_type": records[i][1],
-                "date": records[i][2],
+                "date": parseDate(records[i][2]),
                 "results": [{"player": records[i][3], "points": records[i][4]}]
             }
         } else {
