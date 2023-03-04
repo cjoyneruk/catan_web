@@ -87,8 +87,9 @@
     </div>
       <br>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/charts.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <script src="js/chart.js"></script>
+    <script src="js/chart.funcs.js"></script>
     <script src="js/gsheets.js"></script>
 
     <script>
@@ -157,6 +158,8 @@
         'Sea Farers': null,
         'Cities and Knights': null
     }
+    let chart = null
+    let wins = null
 
     function hoverGameType(game_type){
         display_header = document.getElementById('game_type_display')
@@ -177,6 +180,8 @@
             current_icon.classList.remove('icon-active')
             selection = 0
             updateLeadboardTable(leaderboards[game_options[selection]])
+            updateChart(wins, null)
+
         } else {
             // Select filter
             current_icon.classList.add('icon-active')
@@ -190,6 +195,7 @@
             }
             selection = i
             updateLeadboardTable(leaderboards[game_options[selection]])
+            updateChart(wins, game_options[selection])
         }
 
     }
@@ -210,10 +216,10 @@
             leaderboards[game_type] = createLeaderboard(games.filter(game => game.game_type === game_type))
         }
 
-        const wins = getWins(games)
+        wins = getWins(games)
 
         createLeaderboardTable(leaderboards['All'])
-        createChart(wins)
+        chart = createChart(wins)
 
     }
 
