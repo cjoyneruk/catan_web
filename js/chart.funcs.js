@@ -49,8 +49,10 @@ function createChart(wins){
                     }
                 },
                 legend: {
+                    position: 'right',
                     labels: {
-                        // This more specific font property overrides the global property
+                        boxHeight: 30,
+                        padding: 20,
                         font: {
                             size: 14
                         }
