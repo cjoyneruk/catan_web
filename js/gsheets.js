@@ -56,6 +56,16 @@ function createGames(records){
 
 }
 
+function sortCriteria(a, b){
+    if (a.won !== b.won) {
+        return a.won < b.won
+    } else if (a.points_for !== b.points_for) {
+        return a.points_for < b.points_for
+    } else {
+        return a.played < b.played
+    }
+}
+
 function createLeaderboard(games){
 
     let players = ["Andy", "Joyner", "Kieran", "Lewis"]
@@ -90,8 +100,26 @@ function createLeaderboard(games){
         }
     })
 
-    leaderboard.sort((a, b) => a.won < b.won)
+    leaderboard.sort(sortCriteria)
 
     return leaderboard
 
+}
+
+function getWins(games) {
+        
+    players = ['Andy', 'Joyner', 'Kieran', 'Lewis']
+
+    let wins = {
+        'Original': [0, 0, 0, 0],
+        'Sea Farers': [0, 0, 0, 0],
+        'Cities and Knights': [0, 0, 0, 0]
+    }
+
+    for (let game of games) {
+        i = players.indexOf(game.winner)            
+        wins[game.game_type][i] += 1
+    }
+
+    return wins
 }

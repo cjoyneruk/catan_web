@@ -11,9 +11,9 @@
     --green: rgb(70, 184, 104);
     --gray: rgb(201, 201, 201);
     --red: rgb(154, 36, 36);
-    --dark-yellow: rgb(124, 81, 1);
-    --dark-blue: rgb(12, 41, 101);
-    --dark-green: rgb(3, 97, 66);
+    --catan-yellow: rgb(240, 181, 79);
+    --catan-blue: rgb(50, 131, 230);
+    --catan-green: rgb(57, 148, 38);
 }
 
 *{
@@ -123,7 +123,7 @@ nav {
 .card-grid {
     margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 70px;
 }
 
@@ -137,8 +137,8 @@ nav {
 }
 
 .card-header {
+    padding: 20px;
     position: relative;
-    background-color: var(--dark);
 }
 
 .card-title {
@@ -152,6 +152,25 @@ nav {
     transform: translateY(0px);
     transition: transform 0.2s ease-out;
 }
+
+.history-card .card-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-card .card-header h2 {
+    margin-bottom: 8px;
+}
+
+.original h2 {
+    color: var(--catan-yellow);
+}
+
+.cities_knights h2 {
+    color: var(--catan-green);
+}
+
+
 
 .card:hover .card-title {
     transform: translateY(-5px);
@@ -231,7 +250,7 @@ tbody tr:nth-child(odd){
     border-radius: 5px;
     margin-left: 5px;
     cursor: pointer;
-    opacity: 0.4;
+    opacity: 0.7;
     transition: opacity 0.1s ease-in-out;
 }
 
@@ -243,18 +262,33 @@ tbody tr:nth-child(odd){
     opacity: 1;
 }
 
-.original {
-    background-color: var(--dark-yellow);
+svg.original {
+    background-color: var(--catan-yellow);
 }
 
-.seafarers {
-    background-color: var(--dark-blue);
+svg.seafarers {
+    background-color: var(--catan-blue);
 }
 
-.cities_knights {
-    background-color: var(--dark-green);
+svg.cities_knights {
+    background-color: var(--catan-green);
 }
 
 .icon path {
+    fill: #efefef;
+}
+
+/* card images */
+.card-icon {
+    width: 100px;
+    height: 60px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    transform: translate(30px);
+    box-shadow: 0px 5px 10px rgba(10, 10, 10, 0.1);
+}
+
+.card-icon path {
     fill: #efefef;
 }
