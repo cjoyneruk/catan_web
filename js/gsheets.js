@@ -68,11 +68,11 @@ function createGames(records){
 
 function sortCriteria(a, b){
     if (a.won !== b.won) {
-        return a.won < b.won
+        return a.won < b.won ? 1 : -1
     } else if (a.points_for !== b.points_for) {
-        return a.points_for < b.points_for
+        return a.points_for < b.points_for ? 1 : -1
     } else {
-        return a.played < b.played
+        return a.played < b.played ? 1 : -1
     }
 }
 
